@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculate Leverage</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    #container {
+        width: 300px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    #result {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+<div id="container">
+    <label for="profitChart">Profit on Chart (%)</label>
+    <input type="number" id="profitChart" min="0" step="0.01">
+    <button onclick="calculateLeverage()">Calculate Leverage</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    function calculateLeverage() {
+        var profitChart = parseFloat(document.getElementById('profitChart').value);
+
+        if (isNaN(profitChart) || profitChart <= 0) {
+            alert("Please enter a valid profit percentage from the chart.");
+            return;
+        }
+
+        // Assuming you want to make a $100 trade and target a $3 profit
+        var targetProfit = 3; // $3 target profit
+        var tradeAmount = 100; // $100 trade amount
+
+        // Calculate the leverage based on the profit on chart and required profit
+        var leverage = (targetProfit / tradeAmount) / (profitChart / 100);
+
+        document.getElementById('result').innerText = "Recommended Leverage: " + leverage.toFixed(2) + "x";
+    }
+</script>
+</body>
+</html>
